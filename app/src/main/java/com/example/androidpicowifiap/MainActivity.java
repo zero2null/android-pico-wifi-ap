@@ -54,6 +54,9 @@ public class MainActivity extends AppCompatActivity {
                         .setAnchorView(R.id.fab)
                         .setAction("Action", null).show();
 
+                // Android level low, legacy API is available?
+//                onnectToWifiLegacy(context, ssid, password)
+
                 final NetworkSpecifier specifier =
                         new WifiNetworkSpecifier.Builder()
 //                                .setSsidPattern(new PatternMatcher("picow", PatternMatcher.PATTERN_PREFIX))
@@ -77,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
                         Snackbar.make(view, "onAvailable", Snackbar.LENGTH_LONG)
                                 .setAnchorView(R.id.fab)
                                 .setAction("Action", null).show();
+                        connectivityManager.bindProcessToNetwork(network);
                         Log.d("MyApp", "onAvailable");
                     }
 
@@ -91,6 +95,7 @@ public class MainActivity extends AppCompatActivity {
                         Snackbar.make(view, "onLost", Snackbar.LENGTH_LONG)
                                 .setAnchorView(R.id.fab)
                                 .setAction("Action", null).show();
+                        connectivityManager.bindProcessToNetwork(null);
                         Log.d("MyApp", "onLost");
                     }
 
@@ -134,6 +139,7 @@ public class MainActivity extends AppCompatActivity {
 //  ...
                 };
                 connectivityManager.requestNetwork(request, networkCallback);
+
 //...
 // Release the request when done.
 //                connectivityManager.unregisterNetworkCallback(networkCallback);
