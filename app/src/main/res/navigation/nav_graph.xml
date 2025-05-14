@@ -3,26 +3,24 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/FirstFragment">
+    app:startDestination="@id/loadingFragment">
 
     <fragment
-        android:id="@+id/FirstFragment"
-        android:name="com.example.androidpicowifiap.FirstFragment"
-        android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_first">
-
+        android:id="@+id/loadingFragment"
+        android:name="com.example.androidpicowifiap.LoadingFragment"
+        android:label="LoadingFragment"
+        tools:layout="@layout/fragment_loading">
         <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
+            android:id="@+id/action_loadingFragment_to_controlFragment"
+            app:destination="@id/controlFragment" />
     </fragment>
     <fragment
-        android:id="@+id/SecondFragment"
-        android:name="com.example.androidpicowifiap.SecondFragment"
-        android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_second">
-
+        android:id="@+id/controlFragment"
+        android:name="com.example.androidpicowifiap.ControlFragment"
+        android:label="ControlFragment"
+        tools:layout="@layout/fragment_control">
         <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
+            android:id="@+id/action_controlFragment_to_loadingFragment"
+            app:destination="@id/loadingFragment" />
     </fragment>
 </navigation>
