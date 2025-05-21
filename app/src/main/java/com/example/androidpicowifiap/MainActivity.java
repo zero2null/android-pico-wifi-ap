@@ -45,6 +45,8 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         appBarConfiguration = new AppBarConfiguration.Builder(R.id.controlFragment, R.id.loadingFragment).build();
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
+
+        this.connectWifi();
     }
 
     public void connectWifi() {
@@ -76,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         NavController navController = Navigation.findNavController(MainActivity.this, R.id.nav_host_fragment_content_main);
-                        navController.navigate(R.id.action_loadingFragment_to_controlFragment);
+                        navController.navigate(R.id.controlFragment);
                     }
                 });
 
@@ -94,12 +96,16 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         NavController navController = Navigation.findNavController(MainActivity.this, R.id.nav_host_fragment_content_main);
-                        navController.navigate(R.id.action_controlFragment_to_loadingFragment);
+                        navController.navigate(R.id.loadingFragment);
                     }
                 });
+
+                connectivityManager.unregisterNetworkCallback(this);
+                connectivityManager.requestNetwork(request, this);
             }
 
             public void onUnavailable() {
+                super.onUnavailable();
                 Log.d("MyApp", "onUnavailable");
             }
 
@@ -117,7 +123,6 @@ public class MainActivity extends AppCompatActivity {
         };
 
         connectivityManager.requestNetwork(request, networkCallback);
-
         // Release the request when done.
 //                connectivityManager.unregisterNetworkCallback(networkCallback);
     }
